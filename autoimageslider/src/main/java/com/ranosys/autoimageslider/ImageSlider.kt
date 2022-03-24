@@ -71,8 +71,8 @@ class ImageSlider @JvmOverloads constructor(
         autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_iss_auto_cycle, false)
         placeholder = typedArray.getResourceId(R.styleable.ImageSlider_iss_placeholder, R.drawable.loading)
         errorImage = typedArray.getResourceId(R.styleable.ImageSlider_iss_error_image, R.drawable.error)
-//        selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_selected_dot, R.drawable.default_selected_dot)
-//        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_unselected_dot, R.drawable.default_unselected_dot)
+        selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_selected_dot, R.drawable.default_selected_dot)
+        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_unselected_dot, R.drawable.default_unselected_dot)
         titleBackground = typedArray.getResourceId(R.styleable.ImageSlider_iss_title_background, R.drawable.gradient)
 
         if (typedArray.getString(R.styleable.ImageSlider_iss_text_align) != null){
@@ -106,13 +106,37 @@ class ImageSlider @JvmOverloads constructor(
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         if (imageList.isNotEmpty()){
-            //setupDots(imageList.size)
+            setupDots(imageList.size)
             if (autoCycle) {
                 stopSliding()
                 startSliding()
             }
         }
     }
+
+
+
+
+    /**
+     * Set image list to adapter.
+     * set dots
+     * @param  imageList  the image list by user
+     */
+    fun setImageList(imageList: List<SlideModel>,isDot:Boolean) {
+        viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, textAlign)
+        viewPager!!.adapter = viewPagerAdapter
+        imageCount = imageList.size
+        if (imageList.isNotEmpty()){
+            if (isDot)
+            setupDots(imageList.size)
+            if (autoCycle) {
+                stopSliding()
+                startSliding()
+            }
+        }
+    }
+
+
 
     /**
      * Set image list to adapter.
@@ -125,12 +149,37 @@ class ImageSlider @JvmOverloads constructor(
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         if (imageList.isNotEmpty()){
-           // setupDots(imageList.size)
+            setupDots(imageList.size)
             if (autoCycle) {
                 startSliding()
             }
         }
     }
+
+
+
+
+    /**
+     * Set image list to adapter.
+     * show the dots
+     * @param  imageList  the image list by user
+     * @param  scaleType  scale type for all image
+     */
+    fun setImageList(imageList: List<SlideModel>, scaleType: ScaleTypes? = null,isDot: Boolean) {
+        viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, scaleType, textAlign)
+        viewPager!!.adapter = viewPagerAdapter
+        imageCount = imageList.size
+        if (imageList.isNotEmpty()){
+            if (isDot)
+            setupDots(imageList.size)
+            if (autoCycle) {
+                startSliding()
+            }
+        }
+    }
+
+
+
 
     private fun setupDots(size: Int) {
         println(indicatorAlign)

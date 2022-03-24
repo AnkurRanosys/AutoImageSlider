@@ -2,6 +2,7 @@ package com.ranosys.autoimageslider
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ranosys.autoimageslider.interfaces.ItemClickListener
 import com.ranosys.autoimageslider.models.SlideModel
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +17,13 @@ class MainActivity : AppCompatActivity() {
             SlideModel("https://bit.ly/2BteuF2"),
             SlideModel("https://bit.ly/3fLJf72"))
 
-        slider.setImageList(list)
+        slider.setItemClickListener(object :ItemClickListener{
+            override fun onItemSelected(position: Int) {
+
+            }
+
+        })
+        slider.setImageList(list,isDot = false)
     }
 
 }

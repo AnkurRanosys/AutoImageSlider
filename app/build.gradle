@@ -43,4 +43,7 @@ dependencies {
 
     implementation project(':autoimageslider')
 
+  //  implementation 'com.github.AnkurRanosys:Autoimageslider:1.0.0'
+
+
 }
